@@ -400,6 +400,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Power
+$(call inherit-product, hardware/oplus/libqti-perfd-client/libqti-perfd-client.mk)
 $(call inherit-product, hardware/oplus/power-libperfmgr/power-libperfmgr.mk)
 
 PRODUCT_PACKAGES += \
