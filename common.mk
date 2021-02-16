@@ -400,9 +400,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Power
+$(call inherit-product, hardware/oplus/power-libperfmgr/power-libperfmgr.mk)
+
 PRODUCT_PACKAGES += \
-    android.hardware.power-service-qti \
-    android.hardware.power@1.3.vendor \
     vendor.qti.hardware.perf@2.3.vendor
 
 PRODUCT_COPY_FILES += \
