@@ -143,6 +143,9 @@ debug.sdm.support_writeback=0
 # DRM
 drm.service.enabled=true
 
+# GFX
+ro.config.avoid_gfx_accel=true
+
 # FRP
 ro.frp.pst=/dev/block/bootdevice/by-name/frp
 
