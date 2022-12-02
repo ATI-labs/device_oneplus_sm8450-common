@@ -144,10 +144,6 @@ vendor.audio.dolby.ds2.enabled=true
 vendor.audio.dolby.ds2.hardbypass=true
 ro.vendor.audio.dolby.dax.support=true
 ro.vendor.dolby.dax.version=DAX3_3.6.0.12_r1
-ro.vendor.dolby.model=PAFM00
-ro.vendor.dolby.device=OP46C3
-ro.vendor.dolby.manufacturer=OPLUS
-ro.vendor.dolby.brand=OPLUS
 
 # DRM
 drm.service.enabled=true
@@ -223,6 +219,7 @@ ro.vendor.perf.scroll_opt=true
 
 # Radio
 persist.radio.multisim.config=dsds
+persist.vendor.radio.apm_sim_not_pwdn=1
 persist.vendor.radio.custom_ecc=1
 persist.vendor.radio.enableadvancedscan=true
 persist.vendor.radio.procedure_bytes=SKIP
