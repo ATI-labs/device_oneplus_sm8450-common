@@ -325,7 +325,7 @@ else
 	echo N > /sys/devices/system/cpu/qcom_lpm/parameters/sleep_disabled
 fi
 
-echo s2idle > /sys/power/mem_sleep
+echo deep > /sys/power/mem_sleep
 configure_memory_parameters
 
 # Let kernel know our image version/variant/crm_version
