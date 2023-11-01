@@ -75,6 +75,53 @@ on init
     chmod 0660 /sys/devices/platform/soc/1d84000.ufshc/auto_hibern8
     start logd
 
+    # Setup permissions for Power HAL
+    chown system system /sys/class/kgsl/kgsl-3d0/force_rail_on
+    chown system system /sys/class/kgsl/kgsl-3d0/force_clk_on
+    chown system system /sys/class/kgsl/kgsl-3d0/idle_timer
+    chown system system /sys/devices/system/cpu/bus_dcvs/DDR/19091000.qcom,bwmon-ddr/hist_memory
+    chown system system /sys/devices/system/cpu/bus_dcvs/DDR/19091000.qcom,bwmon-ddr/hyst_length
+    chown system system /sys/devices/system/cpu/bus_dcvs/LLCC/190b6400.qcom,bwmon-llcc/hyst_trigger_count
+    chown system system /sys/devices/system/cpu/bus_dcvs/LLCC/boost_freq
+    chown system system /sys/class/devfreq/soc:qcom,cpu-llcc-ddr-bw/min_freq
+    chown system system /sys/devices/system/cpu/bus_dcvs/L3/boost_freq
+    chown system system /sys/devices/system/cpu/bus_dcvs/DDR/boost_freq
+    chown system system /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq
+    chown system system /sys/devices/system/cpu/cpufreq/policy0/walt/up_rate_limit_us
+    chown system system /sys/devices/system/cpu/cpufreq/policy0/walt/down_rate_limit_us
+    chown system system /sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpufreq/policy4/scaling_min_freq
+    chown system system /sys/devices/system/cpu/cpufreq/policy4/walt/up_rate_limit_us
+    chown system system /sys/devices/system/cpu/cpufreq/policy4/walt/down_rate_limit_us
+    chown system system /sys/devices/system/cpu/cpufreq/policy7/scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpu7/cpufreq/scaling_min_freq
+    chown system system /sys/devices/system/cpu/cpufreq/policy7/walt/up_rate_limit_us
+    chown system system /sys/devices/system/cpu/cpufreq/policy7/walt/down_rate_limit_us
+
+    chmod 0664 /sys/class/kgsl/kgsl-3d0/force_rail_on
+    chmod 0664 /sys/class/kgsl/kgsl-3d0/force_clk_on
+    chmod 0664 /sys/class/kgsl/kgsl-3d0/idle_timer
+    chmod 0664 /sys/devices/system/cpu/bus_dcvs/DDR/19091000.qcom,bwmon-ddr/hist_memory
+    chmod 0664 /sys/devices/system/cpu/bus_dcvs/DDR/19091000.qcom,bwmon-ddr/hyst_length
+    chmod 0664 /sys/devices/system/cpu/bus_dcvs/LLCC/190b6400.qcom,bwmon-llcc/hyst_trigger_count
+    chmod 0664 /sys/devices/system/cpu/bus_dcvs/LLCC/boost_freq
+    chmod 0664 /sys/class/devfreq/soc:qcom,cpu-llcc-ddr-bw/min_freq
+    chmod 0664 /sys/devices/system/cpu/bus_dcvs/L3/boost_freq
+    chmod 0664 /sys/devices/system/cpu/bus_dcvs/DDR/boost_freq
+    chmod 0664 /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq
+    chmod 0664 /sys/devices/system/cpu/cpufreq/policy0/walt/up_rate_limit_us
+    chmod 0664 /sys/devices/system/cpu/cpufreq/policy0/walt/down_rate_limit_us
+    chmod 0664 /sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpufreq/policy4/scaling_min_freq
+    chmod 0664 /sys/devices/system/cpu/cpufreq/policy4/walt/up_rate_limit_us
+    chmod 0664 /sys/devices/system/cpu/cpufreq/policy4/walt/down_rate_limit_us
+    chmod 0664 /sys/devices/system/cpu/cpufreq/policy7/scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpu7/cpufreq/scaling_min_freq
+    chmod 0664 /sys/devices/system/cpu/cpufreq/policy7/walt/up_rate_limit_us
+    chmod 0664 /sys/devices/system/cpu/cpufreq/policy7/walt/down_rate_limit_us
+
 on early-fs
     start vold
 
