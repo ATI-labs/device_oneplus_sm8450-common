@@ -504,6 +504,11 @@ PRODUCT_COPY_FILES += \
 # VNDK
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/apex/com.android.vndk.current.on_vendor.apex:$(TARGET_COPY_OUT_VENDOR)/apex/com.android.vndk.current.on_vendor.apex
 
+PRODUCT_COPY_FILES += \
+    prebuilts/vndk/v30/arm/arch-arm-armv7-a-neon/shared/vndk-core/libui.so:$(TARGET_COPY_OUT_VENDOR)/lib/libui-v30.so \
+    prebuilts/vndk/v33/arm/arch-arm-armv7-a-neon/shared/vndk-core/libstagefright_foundation.so:$(TARGET_COPY_OUT_VENDOR)/lib/libstagefright_foundation-v33.so \
+    prebuilts/vndk/v33/arm64/arch-arm64-armv8-a/shared/vndk-core/libstagefright_foundation.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libstagefright_foundation-v33.so
+
 # WiFi
 PRODUCT_PACKAGES += \
     android.hardware.wifi-service \

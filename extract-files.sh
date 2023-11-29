@@ -96,6 +96,9 @@ function blob_fixup() {
         vendor/etc/msm_irqbalance.conf)
             sed -i "s/IGNORED_IRQ=27,23,38$/&,115,332/" "${2}"
             ;;
+        odm/lib/libdlbdsservice_v3_6.so | odm/lib/libstagefright_soft_ddpdec.so | odm/lib/libstagefrightdolby.so | odm/lib64/libdlbdsservice_v3_6.so)
+            "${PATCHELF}" --replace-needed "libstagefright_foundation.so" "libstagefright_foundation-v33.so" "${2}"
+            ;;
     esac
 }
 
