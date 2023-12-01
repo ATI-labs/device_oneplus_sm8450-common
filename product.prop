@@ -12,3 +12,10 @@ ro.opa.device_model_id=ga-oplus-skill-os121-211011
 persist.sys.scrollingcache=0
 ro.min.fling_velocity=160
 ro.max.fling_velocity=20000
+
+# Power-saving props
+ro.vendor.use_data_netmgrd=true
+ro.vold.umsdirtyratio=20
+ro.ril.disable.power.collapse=0
+power.saving.mode=1
+pm.sleep_mode=1
