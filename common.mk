@@ -122,6 +122,11 @@ PRODUCT_PACKAGES += \
 # Blur
 TARGET_ENABLE_BLUR := true
 
+# Cgroup and task_profiles
+PRODUCT_COPY_FILES += \
+    system/core/libprocessgroup/profiles/cgroups.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \
+    system/core/libprocessgroup/profiles/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
+
 # Camera
 $(call inherit-product-if-exists, vendor/oplus/camera/opluscamera.mk)
 
