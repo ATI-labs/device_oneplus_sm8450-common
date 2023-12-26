@@ -182,6 +182,7 @@ ro.netflix.bsp_rev=Q8450-34634-1
 # Perf
 ro.vendor.extension_library=libqti-perfd-client.so
 vendor.perf.framepacing.enable=1
+ro.vendor.perf.scroll_opt=true
 
 # Radio
 persist.radio.multisim.config=dsds
