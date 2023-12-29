@@ -80,6 +80,8 @@ QCV_FAMILY_SKUS := cape taro
 PRODUCT_PACKAGES += \
     DolbyManager
 
+TARGET_EXCLUDES_AUDIOFX := true
+
 PRODUCT_COPY_FILES += \
     $(AUDIO_HAL_DIR)/configs/common/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     $(AUDIO_HAL_DIR)/configs/taro/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
