@@ -159,6 +159,9 @@ $(call inherit-product-if-exists, vendor/oplus/camera/opluscamera.mk)
 # Inherit Google Camera
 $(call inherit-product-if-exists, vendor/GoogleCamera/config.mk)
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/sysconfig/preinstalled-packages-platform-oplus-product.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/preinstalled-packages-platform-oplus-product.xml
+
 # Dalvik
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
