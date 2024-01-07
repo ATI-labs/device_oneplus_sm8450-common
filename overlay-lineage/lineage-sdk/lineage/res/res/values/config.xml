@@ -61,4 +61,13 @@
         <item>restart_bootloader</item>
         <item>restart_fastboot</item>
     </string-array>
+
+    <!-- The list of package IDs that are allowed to skip camera high frame rate checks. -->
+    <string-array name="config_cameraHFRPrivAppList" translatable="false">
+        <item>com.oplus.camera</item>
+        <item>com.oneplus.camera</item>
+        <item>com.ss.android.ugc.aweme</item>
+        <item>org.codeaurora.snapcam</item>
+        <item>org.lineageos.aperture</item>
+    </string-array>
 </resources>
