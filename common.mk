@@ -228,6 +228,8 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.display.config-V5-ndk_platform.vendor \
     vendor.qti.hardware.display.config-V6-ndk_platform.vendor
 
+USE_OPENGL_RENDERER := true
+
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
 
