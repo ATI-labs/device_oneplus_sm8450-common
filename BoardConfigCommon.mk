@@ -32,7 +32,7 @@ BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
 
 # Architecture
 TARGET_ARCH := arm64
-TARGET_ARCH_VARIANT := armv8-a-branchprot
+TARGET_ARCH_VARIANT := armv9-a
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := generic
@@ -195,6 +195,9 @@ VENDOR_SECURITY_PATCH := $(BOOT_SECURITY_PATCH)
 # SEPolicy
 include device/qcom/sepolicy_vndr/SEPolicy.mk
 include hardware/oplus/sepolicy/qti/SEPolicy.mk
+
+# SurfaceFlinger
+TARGET_USE_AOSP_SURFACEFLINGER := true
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
