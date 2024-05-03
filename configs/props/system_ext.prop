@@ -12,6 +12,9 @@ dalvik.vm.dex2oat64.enabled=true
 debug.sf.enable_hwc_vds=1
 persist.sys.brightness.low.gamma=true
 
+# Deep Sleep
+vendor.post_boot.parsed=1s
+
 # CNE
 persist.vendor.cne.feature=1
 
