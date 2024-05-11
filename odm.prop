@@ -14,6 +14,8 @@ persist.vendor.bluetooth.modem_nv_support=true
 # Display
 ro.vendor.display.sensortype=2
 vendor.display.primary_mixer_stages=9
+vendor.display.disable_spec_fence=1
+vendor.display.disable_noise_layer=1
 
 # Media
 vendor.media.vpp.oplus.version=2
@@ -24,6 +26,7 @@ vendor.media.vpp.sr.enable=0
 vendor.media.vpp.sr.internal.enable=1
 
 # Radio
+persist.vendor.radio.virtualcomm=1
 persist.vendor.radio.force_on_dc=true
 persist.vendor.radio.poweron_opt=1
 persist.vendor.radio.stack_id_0=0
@@ -34,3 +37,8 @@ ro.vendor.oplus.radio.sar_regionmark=FCC
 
 # SVN
 ro.build.version.svn=74
+
+ro.netflix.bsp_rev=Q8450-34634-1
+ro.com.android.dataroaming=false
+dalvik.vm.heapminfree=2m
+ro.product.sar=1.7
