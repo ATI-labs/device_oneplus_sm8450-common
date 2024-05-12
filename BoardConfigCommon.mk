@@ -107,6 +107,7 @@ BOARD_RAMDISK_USE_LZ4 := true
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
 BOARD_USES_QCOM_MERGE_DTBS_SCRIPT := true
 TARGET_KERNEL_SOURCE := kernel/oneplus/sm8450
+TARGET_KERNEL_CLANG_VERSION := r487747c
 TARGET_KERNEL_CONFIG := gki_defconfig vendor/waipio_GKI.config vendor/oplus_GKI.config vendor/debugfs.config
 
 # Kernel modules
