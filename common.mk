@@ -240,6 +240,10 @@ PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.1-impl.custom \
     fastbootd
 
+# Features
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/com.samsung.feature.samsung_experience_am.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.samsung.feature.samsu
+
 # Fingerprint
 PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.3-service.oplus
