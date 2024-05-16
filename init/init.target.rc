@@ -78,6 +78,10 @@ on init
 on early-fs
     start vold
 
+    # libperfmgr thermal profiles permissions
+    chmod 0664 /sys/devices/virtual/thermal/thermal_message/sconfig
+    chown system system /sys/devices/virtual/thermal/thermal_message/sconfig
+
 on fs
     start hwservicemanager
     mount_all /vendor/etc/fstab.qcom --early
