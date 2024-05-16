@@ -137,8 +137,8 @@ PRODUCT_PACKAGES += \
     android.frameworks.sensorservice@1.0.vendor \
     android.frameworks.stats-V1-ndk_platform.vendor \
     android.hardware.camera.provider@2.7.vendor \
-    android.hardware.graphics.common-V4-ndk.vendor \
-    android.hardware.graphics.common-V4-ndk_platform.vendor \
+    android.hardware.graphics.common-V2-ndk.vendor \
+    android.hardware.graphics.common-V2-ndk_platform.vendor \
     camera.device@1.0-impl \
     libcamera2ndk_vendor \
     vendor.qti.hardware.camera.aon@1.0.vendor \
@@ -156,7 +156,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.full.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.full.xml \
     frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml
 
-# Oneplus Camera
+# Legacy Oneplus Camera
 $(call inherit-product-if-exists, vendor/oplus/camera/opluscamera.mk)
 
 # Inherit Google Camera
@@ -202,6 +202,7 @@ PRODUCT_SYSTEM_PROPERTIES += \
 # Display
 PRODUCT_PACKAGES += \
     android.hardware.common-V2-ndk_platform.vendor \
+    android.hardware.graphics.common-V1-ndk_platform.vendor \
     android.hardware.graphics.mapper@4.0-impl-qti-display \
     init.qti.display_boot.rc \
     init.qti.display_boot.sh \
@@ -211,6 +212,7 @@ PRODUCT_PACKAGES += \
     libqdMetaData.system \
     libsdmcore \
     libsdmutils \
+    libtinyxml \
     vendor.display.config@1.0 \
     vendor.display.config@1.15.vendor \
     vendor.display.config@2.0 \
@@ -230,8 +232,6 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.display.mapper@2.0.vendor \
     vendor.qti.hardware.display.mapper@3.0.vendor \
     vendor.qti.hardware.display.mapper@4.0.vendor
-
-USE_OPENGL_RENDERER := true
 
 USE_OPENGL_RENDERER := true
 
@@ -389,10 +389,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/dolby/dax-default.xml:$(TARGET_COPY_OUT_VENDOR)/etc/dolby/dax-default.xml
 
 TARGET_EXCLUDES_AUDIOFX := true
-
-PRODUCT_COPY_FILES += \
-    prebuilts/vndk/v33/arm/arch-arm-armv7-a-neon/shared/vndk-core/libstagefright_foundation.so:$(TARGET_COPY_OUT_VENDOR)/lib/libstagefright_foundation-v33.so \
-    prebuilts/vndk/v33/arm64/arch-arm64-armv8-a/shared/vndk-core/libstagefright_foundation.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libstagefright_foundation-v33.so
 
 # Net
 PRODUCT_PACKAGES += \
@@ -574,7 +570,7 @@ PRODUCT_COPY_FILES += \
 # ViPER4Android FX
 $(call inherit-product-if-exists, packages/apps/ViPER4AndroidFX/config.mk)
 
-# VNDK
+# VNDK - APEX
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/apex/com.android.vndk.current.on_vendor.apex:$(TARGET_COPY_OUT_VENDOR)/apex/com.android.vndk.current.on_vendor.apex
 
 PRODUCT_COPY_FILES += \

@@ -26,7 +26,6 @@ vendor.media.vpp.sr.enable=0
 vendor.media.vpp.sr.internal.enable=1
 
 # Radio
-persist.vendor.radio.virtualcomm=1
 persist.vendor.radio.force_on_dc=true
 persist.vendor.radio.poweron_opt=1
 persist.vendor.radio.stack_id_0=0
