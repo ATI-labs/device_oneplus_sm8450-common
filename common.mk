@@ -243,6 +243,9 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.4.vendor \
     android.hardware.drm-service.clearkey
 
+# extra
+    $(call inherit-product, $(LOCAL_PATH)/extra/product.mk)
+
 # Face biometrics
 PRODUCT_PACKAGES += \
     libcamera2ndk_vendor \
