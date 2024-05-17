@@ -8,6 +8,7 @@ LOCAL_OVERRIDES_PACKAGES := \
     Chrome \
     Chrome-Stub \
     Drive \
+    Glimpse \
     Maps \
     Photos \
     PrebuiltGmail \
