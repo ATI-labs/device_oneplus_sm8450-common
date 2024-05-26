@@ -296,6 +296,9 @@ PRODUCT_PACKAGES += \
     ipacm \
     IPACM_cfg.xml
 
+# Lib Init
+TARGET_INIT_VENDOR_LIB := //$(LOCAL_PATH):libinit_sm8450-common
+
 # Init
 PRODUCT_PACKAGES += \
     fstab.qcom \

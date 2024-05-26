@@ -4,6 +4,13 @@
 //
 
 cc_library_static {
+    name: "libinit_libinit_sm8450-common",
+    recovery_available: true,
+    shared_libs: ["libbase"],
+    srcs: ["libinit_sm8450-common.cpp"],
+}
+
+cc_library_static {
     name: "libinit_oplus",
     recovery_available: true,
     shared_libs: ["libbase"],
