@@ -425,8 +425,10 @@ PRODUCT_PACKAGES += \
     android.hardware.power@1.3.vendor \
     vendor.qti.hardware.perf@2.3.vendor
 
-#Private Keys
+# Private Keys
+-include vendor/extra/product.mk
 -include vendor/lineage-priv/keys/keys.mk
+-include vendor/evolution-priv/keys/keys.mk
 
 # Protobuf
 PRODUCT_PACKAGES += \
