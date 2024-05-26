@@ -243,6 +243,9 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.4.vendor \
     android.hardware.drm-service.clearkey
 
+# extra build signature private vendor
+-include vendor/extra/product.mk
+
 # extra
     $(call inherit-product, $(LOCAL_PATH)/extra/product.mk)
 
