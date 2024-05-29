@@ -245,6 +245,8 @@ PRODUCT_PACKAGES += \
 
 # extra build signature private vendor
 -include vendor/extra/product.mk
+-include vendor/lineage-priv/keys/keys.mk
+-include vendor/evolution-priv/keys/keys.mk
 
 # extra
     $(call inherit-product, $(LOCAL_PATH)/extra/product.mk)
