@@ -41,14 +41,14 @@ function configure_zram_parameters() {
 	let RamSizeGB="( $MemTotal / 1048576 ) + 1"
 	diskSizeUnit=M
 	if [ $RamSizeGB -le 2 ]; then
-		let zRamSizeMB="( $RamSizeGB * 1024 ) * 3 / 4"
+		let zRamSizeMB="( $RamSizeGB * 1024 ) * 3"
 	else
-		let zRamSizeMB="( $RamSizeGB * 1024 ) / 2"
+		let zRamSizeMB="( $RamSizeGB * 1024 ) * 3"
 	fi
 
 	# use MB avoid 32 bit overflow
-	if [ $zRamSizeMB -gt 4096 ]; then
-		let zRamSizeMB=4096
+	if [ $zRamSizeMB -gt 32768 ]; then
+		let zRamSizeMB=32768
 	fi
 
 	echo lz4 > /sys/block/zram0/comp_algorithm
@@ -68,8 +68,18 @@ function configure_zram_parameters() {
 			echo 0 > /sys/kernel/slab/zspage/store_user
 		fi
 
+		echo memlim > /sys/block/zram0/mem_limit
+		echo 8 > /sys/block/zram0/max_comp_streams
 		mkswap /dev/block/zram0
 		swapon /dev/block/zram0 -p 32758
+		echo 100 > /proc/sys/vm/swappiness
+		echo 15 > /proc/sys/vm/dirty_background_ratio
+		echo 200 > /proc/sys/vm/vfs_cache_pressure
+		echo 3000 > /proc/sys/vm/dirty_writeback_centisecs
+		echo 3 > /proc/sys/vm/drop_caches
+		echo 0 > /proc/sys/vm/oom_kill_allocating_task
+		echo "256,10240,32000,34000,36000,38000" > /sys/module/lowmemorykiller/parameters/minfree
+		cat /sys/module/lowmemorykiller/parameters/minfree
 	fi
 }
 
@@ -116,7 +126,6 @@ function configure_memory_parameters() {
 
 	configure_zram_parameters
 	configure_read_ahead_kb_values
-	echo 100 > /proc/sys/vm/swappiness
 
 	# Disable periodic kcompactd wakeups. We do not use THP, so having many
 	# huge pages is not as necessary.
