@@ -267,7 +267,7 @@ vendor.sensor.hal.pickup=android.sensor.tilt_detector
 
 # USB
 sys.usb.mtp.batchcancel=1
-vendor.usb.use_gadget_hal=0
+vendor.usb.use_gadget_hal=1
 vendor.usb.rndis.func.name=gsi
 vendor.usb.rmnet.func.name=gsi
 vendor.usb.rmnet.inst.name=rmnet
