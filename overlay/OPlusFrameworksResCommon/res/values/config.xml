@@ -218,6 +218,31 @@
     <!-- The list of packages to automatically opt out of refresh rates higher than 60hz because
          of known compatibility issues. -->
     <string-array name="config_highRefreshRateBlacklist">
+        <item>"com.hulu.plus"</item>
+        <item>"com.peacocktv.peacockandroid"</item>
+        <item>"com.cbs.ca"</item>
+        <item>"tv.fubo.mobile"</item>
+        <item>"com.tubitv"</item>
+        <item>"com.apple.atve.androidtv.appletv"</item>
+        <item>"com.gotv.crackle.handset"</item>
+        <item>"com.roku.trc"</item>
+        <item>"com.sling"</item>
+        <item>"com.amazon.imdb.tv.mobile.app"</item>
+        <item>"com.hbo.hbonow"</item>
+        <item>"com.philo.philo.google"</item>
+        <item>"tv.pluto.android"</item>
+        <item>"com.bydeluxe.d3.android.program.starz"</item>
+        <item>"com.xumo.xumo"</item>
+        <item>"com.Funimation.FunimationNow"</item>
+        <item>"com.att.tv"</item>
+        <item>"com.aparat"</item>
+        <item>"com.sabaidea.aparat.kids"</item>
+        <item>"com.sabaidea.filimo"</item>
+        <item>"com.shatelland.namava"</item>
+        <item>"com.robin.filmnet"</item>
+        <item>"com.cinematoproduction.cinemato"</item>
+        <item>"org.videolan.vlc"</item>
+        <item>"com.mxtech.videoplayer.ad"</item>
         <item>"com.netflix.mediaclient"</item>
         <item>"com.instagram.android"</item>
         <item>"com.crunchyroll.crunchyroid"</item>
