@@ -125,6 +125,9 @@ PRODUCT_COPY_FILES += \
     system/core/libprocessgroup/profiles/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
 
 # Camera
+PRODUCT_PACKAGES += \
+    libutilscallstack.vendor
+
 $(call inherit-product, vendor/oneplus/camera/camera-vendor.mk)
 
 PRODUCT_PACKAGES += \
@@ -202,6 +205,7 @@ PRODUCT_SYSTEM_PROPERTIES += \
 # Display
 PRODUCT_PACKAGES += \
     android.hardware.common-V2-ndk_platform.vendor \
+    android.hardware.graphics.common-V1-ndk.vendor \
     android.hardware.graphics.common-V1-ndk_platform.vendor \
     android.hardware.graphics.mapper@4.0-impl-qti-display \
     init.qti.display_boot.rc \
