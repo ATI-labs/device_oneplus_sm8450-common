@@ -5,8 +5,6 @@ LOCAL_MODULE := RemovePackages
 LOCAL_MODULE_CLASS := APPS
 LOCAL_MODULE_TAGS := optional
 LOCAL_OVERRIDES_PACKAGES := \
-    Chrome \
-    Chrome-Stub \
     Drive \
     Glimpse \
     Maps \
@@ -14,8 +12,7 @@ LOCAL_OVERRIDES_PACKAGES := \
     PrebuiltGmail \
     RecorderPrebuilt \
     SafetyHubPrebuilt \
-    Videos \
-    YouTube
+    Videos
 LOCAL_UNINSTALLABLE_MODULE := true
 LOCAL_CERTIFICATE := PRESIGNED
 LOCAL_SRC_FILES := /dev/null
