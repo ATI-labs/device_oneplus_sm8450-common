@@ -61,9 +61,12 @@ PRODUCT_PACKAGES += \
     libeffectproxy \
     libhapticgenerator \
     libldnhncr \
+    libaudioroute.vendor \
+    libprocessgroup.vendor \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
+    libhfp_pal \
     libreverbwrapper \
     libsndcardparser \
     libtinycompress \
@@ -106,6 +109,15 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.btconfigstore@1.0.vendor \
     vendor.qti.hardware.btconfigstore@2.0.vendor
 
+# Bluetooth Library Deps
+PRODUCT_PACKAGES += \
+    liblhdc \
+    liblhdcv5 \
+    libldacBT_abr \
+    libldacBT_enc \
+    liblhdcBT_enc \
+    liblhdcv5BT_enc
+
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml
@@ -126,7 +138,8 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    libutilscallstack.vendor
+    libutilscallstack.vendor \
+    libutilscallstack.vendor:64
 
 $(call inherit-product, vendor/oneplus/camera/camera-vendor.mk)
 
@@ -139,9 +152,13 @@ PRODUCT_PACKAGES += \
     android.frameworks.cameraservice.service@2.2.vendor \
     android.frameworks.sensorservice@1.0.vendor \
     android.frameworks.stats-V1-ndk_platform.vendor \
+    android.hardware.camera.provider@2.4.vendor \
+    android.hardware.camera.provider@2.5.vendor \
+    android.hardware.camera.provider@2.6.vendor \
     android.hardware.camera.provider@2.7.vendor \
     android.hardware.graphics.common-V2-ndk.vendor \
     android.hardware.graphics.common-V2-ndk_platform.vendor \
+    android.hardware.graphics.common-V4-ndk \
     camera.device@1.0-impl \
     libcamera2ndk_vendor \
     vendor.qti.hardware.camera.aon@1.0.vendor \
@@ -151,6 +168,11 @@ PRODUCT_PACKAGES += \
     libutilscallstack.vendor \
     libyuv.vendor \
     vendor.qti.hardware.camera.postproc@1.0.vendor
+
+PRODUCT_PACKAGES += \
+    android.frameworks.displayservice@1.0.vendor \
+    libcamera_provider_shim \
+    libpiex_shim
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.concurrent.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.concurrent.xml \
@@ -316,8 +338,9 @@ PRODUCT_COPY_FILES += \
 
 # Health
 PRODUCT_PACKAGES += \
-    android.hardware.health@2.1-impl-qti \
-    android.hardware.health@2.1-service
+    android.hardware.health-service.qti_recovery \
+    android.hardware.health-service.qti \
+    android.hardware.health@2.1.vendor
 
 # HIDL
 PRODUCT_PACKAGES += \
@@ -384,6 +407,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vendor.lineage.livedisplay@2.1-service.oplus
 
+# LZ4
+PRODUCT_PACKAGES += \
+    liblz4.vendor
+
 # Media
 PRODUCT_COPY_FILES += \
     $(AUDIO_HAL_DIR)/configs/common/codec2/media_codecs_c2_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_c2_audio.xml \
@@ -400,6 +427,8 @@ PRODUCT_PACKAGES += \
     libavservices_minijail \
     libavservices_minijail.vendor \
     libcodec2_hidl@1.0.vendor \
+    libcodec2_soft_common.vendor \
+    libcodec2_vndk.vendor \
     libpalclient
 
 # Moto Dolby
@@ -410,7 +439,9 @@ TARGET_EXCLUDES_AUDIOFX := true
 
 # Net
 PRODUCT_PACKAGES += \
-    android.system.net.netd@1.1.vendor
+    android.system.net.netd@1.1.vendor \
+    libnetutils.vendor \
+    netutils-wrapper-1.0
 
 # Neural network
 PRODUCT_PACKAGES += \
@@ -419,7 +450,9 @@ PRODUCT_PACKAGES += \
 # OMX
 PRODUCT_PACKAGES += \
     libOmxCore \
-    libstagefrighthw
+    libstagefrighthw \
+    libstagefright_omx.vendor \
+    libstagefright_softomx_plugin.vendor
 
 # Overlays
 $(call inherit-product, hardware/oplus/overlay/generic/generic.mk)
@@ -458,10 +491,14 @@ PRODUCT_PACKAGES += \
 
 # QMI
 PRODUCT_PACKAGES += \
+    libcurl.vendor \
     libcurl.vendor:64 \
     libjson \
     libjsoncpp.vendor \
+    libqti_vndfwk_detect \
+    libqti_vndfwk_detect.vendor \
     libqti_vndfwk_detect_vendor \
+    libsqlite.vendor \
     libsqlite.vendor:64 \
     libvndfwk_detect_jni.qti.vendor
 
@@ -475,7 +512,10 @@ PRODUCT_PACKAGES += \
     android.hardware.radio.config@1.3.vendor \
     android.hardware.radio.deprecated@1.0.vendor \
     android.hardware.secure_element@1.2.vendor \
-    librmnetctl
+    libril \
+    librilutils \
+    librmnetctl \
+    libssl.vendor
 
 # Sensors
 PRODUCT_PACKAGES += \
@@ -565,7 +605,8 @@ PRODUCT_PACKAGES_DEBUG += \
 
 # USB
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.3-service.dual_role_usb
+    android.hardware.usb@1.3-service.dual_role_usb \
+    libusbhost.vendor
 
 PRODUCT_SOONG_NAMESPACES += \
     vendor/qcom/opensource/usb/etc
@@ -608,6 +649,7 @@ PRODUCT_PACKAGES += \
     libwpa_client \
     libwifi-hal-ctrl \
     libwifi-hal-qcom \
+    wpa_cli \
     wpa_supplicant \
     wpa_supplicant.conf
 
