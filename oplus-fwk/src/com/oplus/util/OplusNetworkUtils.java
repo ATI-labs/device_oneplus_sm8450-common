@@ -6,7 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 
-public class OplusNetworkUtil {
+public class OplusNetworkUtils {
 
     private static final String DEFAULT_HTTP_URI = "http://connectivitycheck.gstatic.com/generate_204";
 
