@@ -39,10 +39,3 @@ java_import {
         "libs/LeonidsLib.jar",
     ],
 }
-
-sh_binary {
-    name: "tri-state-key-calibrate",
-    init_rc: ["tri-state-key-calibrate.rc"],
-    src: "tri-state-key-calibrate.sh",
-    vendor: true,
-}
