@@ -29,7 +29,6 @@ remote_provisioning.enable_rkpd=true
 remote_provisioning.hostname=remoteprovisioning.googleapis.com
 ro.af.client_heap_size_kbyte=7168
 ro.product.cpu.pagesize.max=4096
-ro.dalvik.vm.enable_uffd_gc=true
 
 # Charger
 ro.charger.enable_suspend=true
