@@ -144,7 +144,6 @@ public class KeyHandler implements DeviceKeyHandler {
         return null;
     }
 
-    @Override
     public void onPocketStateChanged(boolean inPocket) {
         // do nothing
     }

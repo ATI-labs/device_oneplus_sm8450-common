@@ -145,7 +145,6 @@ public class KeyHandler implements DeviceKeyHandler {
                 Settings.Secure.USER_SETUP_COMPLETE, 0) != 0;
     }
 
-    @Override
     public void onPocketStateChanged(boolean inPocket) {
         // do nothing
     }
