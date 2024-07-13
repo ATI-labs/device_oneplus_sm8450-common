@@ -149,6 +149,7 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.7.vendor \
     android.hardware.graphics.common-V2-ndk.vendor \
     android.hardware.graphics.common-V2-ndk_platform.vendor \
+    android.hardware.graphics.common-V3-ndk.vendor \
     android.hardware.graphics.common-V4-ndk \
     camera.device@1.0-impl \
     libcamera2ndk_vendor \
