@@ -349,8 +349,6 @@ PRODUCT_COPY_FILES += \
     $(AUDIO_HAL_DIR)/configs/common/codec2/service/1.0/c2audio.vendor.ext-arm64.policy:vendor/etc/seccomp_policy/c2audio.vendor.ext-arm64.policy
 
 PRODUCT_PACKAGES += \
-    libavservices_minijail \
-    libavservices_minijail.vendor \
     libcodec2_hidl@1.0.vendor \
     libpalclient
 
@@ -418,7 +416,8 @@ PRODUCT_PACKAGES += \
 
 # QTI components
 TARGET_COMMON_QTI_COMPONENTS += \
-    alarm
+    alarm \
+    av
 
 include $(QCOM_COMMON_PATH)/components.mk
 
