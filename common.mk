@@ -646,9 +646,7 @@ PRODUCT_COPY_FILES += \
 # ViPER4Android FX
 $(call inherit-product-if-exists, packages/apps/ViPER4AndroidFX/config.mk)
 
-# VNDK - APEX
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/apex/com.android.vndk.current.on_vendor.apex:$(TARGET_COPY_OUT_VENDOR)/apex/com.android.vndk.current.on_vendor.apex
-
+# VNDK
 PRODUCT_COPY_FILES += \
     prebuilts/vndk/v30/arm/arch-arm-armv7-a-neon/shared/vndk-core/libui.so:$(TARGET_COPY_OUT_VENDOR)/lib/libui-v30.so \
     prebuilts/vndk/v33/arm/arch-arm-armv7-a-neon/shared/vndk-core/libstagefright_foundation.so:$(TARGET_COPY_OUT_VENDOR)/lib/libstagefright_foundation-v33.so \
