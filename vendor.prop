@@ -278,10 +278,7 @@ vendor.usb.diag.func.name=ffs
 vendor.usb.use_ffs_mtp=1
 persist.sys.usb.config=none
 
-# VNDK
-ro.vndk.version=35
-
-# WiFi
+#WiFi
 wifi.aware.interface=wifi-aware0
 
 # Zygote
