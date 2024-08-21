@@ -197,6 +197,10 @@ PRODUCT_BOOT_JARS += \
 PRODUCT_BOOT_JARS += \
     oplus-support-wrapper
 
+# Configstore
+PRODUCT_PACKAGES += \
+    vendor.qti.hardware.capabilityconfigstore@1.0.vendor
+
 # Dalvik
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
