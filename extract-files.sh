@@ -101,6 +101,10 @@ function blob_fixup() {
             [ "$2" = "" ] && return 0
             sed -i "/max_retry_alloc_output_timeout/ s/2000/0/" "${2}"
             ;;
+        system_ext/framework/oplus-ims-ext.jar)
+            [ "$2" = "" ] && return 0
+            apktool_patch "${2}" "${MY_DIR}/configs/blob-patches/oplus-ims-ext.patch" -r
+            ;;
         vendor/etc/libnfc-nci.conf)
             [ "$2" = "" ] && return 0
             sed -i "s/NFC_DEBUG_ENABLED=1/NFC_DEBUG_ENABLED=0/" "${2}"
