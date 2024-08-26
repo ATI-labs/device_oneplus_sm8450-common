@@ -446,6 +446,10 @@ PRODUCT_PACKAGES += \
     libstagefright_omx.vendor \
     libstagefright_softomx_plugin.vendor
 
+# OSENSE
+PRODUCT_PACKAGES += \
+    vendor.oplus.hardware.osense.client-service
+
 # Overlays
 $(call inherit-product, hardware/oplus/overlay/generic/generic.mk)
 $(call inherit-product, hardware/oplus/overlay/qssi/qssi.mk)
