@@ -125,17 +125,31 @@ ifneq ($(filter wly, $(TARGET_DEVICE)),)
 else
 BOARD_KERNEL_SEPARATED_DTBO := true
 endif
+ifeq ($(strip $(PREBUILT_KERNEL)),true)
+BOARD_KERNEL_SEPARATED_DTBO := true
+else
+#
+endif
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_RAMDISK_USE_LZ4 := true
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
-BOARD_USES_QCOM_MERGE_DTBS_SCRIPT := true
 TARGET_KERNEL_SOURCE := kernel/oneplus/sm8450
 TARGET_KERNEL_CLANG_VERSION := r487747c
-TARGET_KERNEL_CONFIG := gki_defconfig vendor/waipio_GKI.config vendor/oplus_GKI.config vendor/debugfs.config
-
 USE_KERNEL_AOSP_LLVM := true
 KERNEL_FULL_LLVM := true
 
+ifeq ($(strip $(PREBUILT_KERNEL)),true)
+TARGET_KERNEL_CONFIG := gki_defconfig
+KERNEL_LTO := none
+TARGET_FORCE_PREBUILT_KERNEL := true
+else
+BOARD_USES_QCOM_MERGE_DTBS_SCRIPT := true
+TARGET_KERNEL_CONFIG := gki_defconfig vendor/waipio_GKI.config vendor/oplus_GKI.config vendor/debugfs.config
+endif
+
+ifeq ($(strip $(PREBUILT_KERNEL)),true)
+#
+else
 # Kernel modules
 BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(TARGET_KERNEL_SOURCE)/modules.vendor_blocklist.msm.waipio
 BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/modules.load))
@@ -161,6 +175,7 @@ TARGET_KERNEL_EXT_MODULES := \
     qcom/opensource/eva-kernel \
     qcom/opensource/video-driver \
     qcom/opensource/wlan/qcacld-3.0/.qca6490
+endif
 
 # Lineage Health
 TARGET_HEALTH_CHARGING_CONTROL_CHARGING_PATH := /sys/class/oplus_chg/battery/mmi_charging_enable
@@ -202,7 +217,11 @@ TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/double_tap_enable"
 
 # Recovery
 BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE := true
+ifeq ($(strip $(PREBUILT_KERNEL)),true)
+#
+else
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+endif
 TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/init/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_USERIMAGES_USE_EXT4 := true
