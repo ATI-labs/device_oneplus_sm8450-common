@@ -167,6 +167,13 @@ PRODUCT_COPY_FILES += \
 $(call inherit-product-if-exists, vendor/GoogleCamera/config.mk)
 
 # Dalvik
+PRODUCT_VENDOR_PROPERTIES += \
+    dalvik.vm.heapgrowthlimit=384m \
+    dalvik.vm.heaptargetutilization=0.75 \
+    dalvik.vm.heapminfree=512k \
+    dalvik.vm.heapmaxfree=8m \
+    dalvik.vm.ps-min-first-save-ms=5000 \
+    dalvik.vm.usejitprofiles=true
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
 # DebugFS
