@@ -180,6 +180,9 @@ $(call inherit-product-if-exists, vendor/oplus/camera/opluscamera.mk)
 # Inherit Google Camera
 $(call inherit-product-if-exists, vendor/GoogleCamera/config.mk)
 
+# TrickyStore
+$(call inherit-product-if-exists, vendor/TrickyStore/config.mk)
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sysconfig/preinstalled-packages-platform-oplus-product.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/preinstalled-packages-platform-oplus-product.xml \
     $(LOCAL_PATH)/configs/permissions/oplus_camera_default_grant_permissions_list.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/default-permissions/oplus_camera_default_grant_permissions_list.xml \
