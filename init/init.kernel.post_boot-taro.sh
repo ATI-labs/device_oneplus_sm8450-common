@@ -30,6 +30,47 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #=============================================================================
 
+echo "powersave" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+
+echo "powersave" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+echo "powersave" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
+echo "powersave" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
+
+echo "powersave" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
+echo "powersave" > /sys/devices/system/cpu/cpu5/cpufreq/scaling_governor
+echo "powersave" > /sys/devices/system/cpu/cpu6/cpufreq/scaling_governor
+
+echo 1804800 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq  # Prime
+echo 1324800 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq  # Perform>
+echo 844800  > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq  # Efficie>
+
+echo 305000000 > /sys/class/kgsl/kgsl-3d0/devfreq/max_freq
+
+echo "powersave" > /sys/class/kgsl/kgsl-3d0/devfreq/governor
+
+echo "noop" > /sys/block/sda/queue/scheduler
+
+for i in 1 2 3 4 5 6; do
+    echo 0 > /sys/devices/system/cpu/cpu$i/online
+done
+
+for i in 1 2 3 4 5 6; do
+    echo 1 > /sys/devices/system/cpu/cpu$i/online
+done
+
+echo "powersave" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+echo 2500000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+
+for i in 1 2 3; do
+    echo "powersave" > /sys/devices/system/cpu/cpu$i/cpufreq/scaling_governor
+    echo 2000000 > /sys/devices/system/cpu/cpu$i/cpufreq/scaling_max_freq
+done
+
+for i in 4 5 6; do
+    echo "powersave" > /sys/devices/system/cpu/cpu$i/cpufreq/scaling_governor
+    echo 1200000 > /sys/devices/system/cpu/cpu$i/cpufreq/scaling_max_freq
+done
+
 function configure_zram_parameters() {
 	MemTotalStr=`cat /proc/meminfo | grep MemTotal`
 	MemTotal=${MemTotalStr:16:8}
