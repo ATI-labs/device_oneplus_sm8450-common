@@ -23,3 +23,53 @@ persist.log.tag.TrafficStats=S
 persist.log.tag.ContrastColorUtil=S
 persist.log.tag.OpenGLRenderer=S
 persist.log.tag.ultrasound_extn=S
+
+# battery - thermal - performance
+persist.sys.oplus.nandswap=false
+ro.config.hw_quickpoweron=true
+
+# Media Tweak
+ro.media.enc.jpeg.quality=100
+
+# RAM Tweak
+logcat.live=disable
+persist.service.pcsync.enable=0
+persist.service.lgospd.enable=0
+dalvik.vm.dexopt-flags=m=y
+
+# UI Tweak
+persist.service.lgospd.enable=0
+persist.service.pcsync.enable=0
+
+# Modem Tweak
+net.tcp.buffersize.default=4096,87380,256960,4096, 16384,256960
+net.tcp.buffersize.wifi=4096,87380,256960,4096,16384,256960
+net.tcp.buffersize.umts=4096,87380,256960,4096,16384,256960
+net.tcp.buffersize.gprs=4096,87380,256960,4096,16384,256960
+net.tcp.buffersize.edge=4096,87380,256960,4096,16384,256960
+net.ipv4.ip_no_pmtu_disc=0
+net.ipv4.route.flush=1
+net.ipv4.tcp_ecn=0
+net.ipv4.tcp_fack=1
+net.ipv4.tcp_mem=187000 187000 187000
+net.ipv4.tcp_moderate_rcvbuf=1
+net.ipv4.tcp_no_metrics_save=1
+net.ipv4.tcp_rfc1337=1
+net.ipv4.tcp_rmem=4096 39000 187000
+net.ipv4.tcp_sack=1
+net.ipv4.tcp_timestamps=1
+net.ipv4.tcp_window_scaling=1
+net.ipv4.tcp_wmem=4096 39000 187000
+persist.cust.tel.eons=1
+ro.ril.gprsclass=10
+ro.ril.hsdpa.category=8
+ro.ril.hsupa.category=6
+ro.ril.hsxpa=1
+ 
+# Battery Tweak
+wifi.supplicant_scan_interval=200
+pm.sleep_mode=1
+persist.radio.data_no_toggle=1
+
+# Scroll Tweak
+persist.sys.use_16bpp_alpha=1

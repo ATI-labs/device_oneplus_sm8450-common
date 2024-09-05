@@ -30,6 +30,47 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #=============================================================================
 
+echo "powersave" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+
+echo "powersave" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+echo "powersave" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
+echo "powersave" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
+
+echo "powersave" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
+echo "powersave" > /sys/devices/system/cpu/cpu5/cpufreq/scaling_governor
+echo "powersave" > /sys/devices/system/cpu/cpu6/cpufreq/scaling_governor
+
+echo 1804800 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq  # Prime
+echo 1324800 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq  # Perform>
+echo 844800  > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq  # Efficie>
+
+echo 305000000 > /sys/class/kgsl/kgsl-3d0/devfreq/max_freq
+
+echo "powersave" > /sys/class/kgsl/kgsl-3d0/devfreq/governor
+
+echo "noop" > /sys/block/sda/queue/scheduler
+
+for i in 1 2 3 4 5 6; do
+    echo 0 > /sys/devices/system/cpu/cpu$i/online
+done
+
+for i in 1 2 3 4 5 6; do
+    echo 1 > /sys/devices/system/cpu/cpu$i/online
+done
+
+echo "powersave" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+echo 2500000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+
+for i in 1 2 3; do
+    echo "powersave" > /sys/devices/system/cpu/cpu$i/cpufreq/scaling_governor
+    echo 2000000 > /sys/devices/system/cpu/cpu$i/cpufreq/scaling_max_freq
+done
+
+for i in 4 5 6; do
+    echo "powersave" > /sys/devices/system/cpu/cpu$i/cpufreq/scaling_governor
+    echo 1200000 > /sys/devices/system/cpu/cpu$i/cpufreq/scaling_max_freq
+done
+
 function configure_zram_parameters() {
 	MemTotalStr=`cat /proc/meminfo | grep MemTotal`
 	MemTotal=${MemTotalStr:16:8}
@@ -79,6 +120,21 @@ function configure_zram_parameters() {
 		echo 3 > /proc/sys/vm/drop_caches
 		echo 0 > /proc/sys/vm/oom_kill_allocating_task
 		echo "256,10240,32000,34000,36000,38000" > /sys/module/lowmemorykiller/parameters/minfree
+
+		echo 70 > /dev/memcg/memory.swapd_max_reclaim_size
+		echo "1000 50" > /dev/memcg/memory.swapd_shrink_parameter
+		echo 5000 > /dev/memcg/memory.max_skip_interval
+		echo 50 > /dev/memcg/memory.reclaim_exceed_sleep_ms
+		echo 60 > /dev/memcg/memory.cpuload_threshold
+		echo 30 > /dev/memcg/memory.max_reclaimin_size_mb
+		echo 80 > /dev/memcg/memory.zram_wm_ratio
+		echo 512 > /dev/memcg/memory.empty_round_skip_interval
+		echo 20 > /dev/memcg/memory.empty_round_check_threshold
+
+		echo apps >/dev/memcg/apps/memory.name
+		echo 300 > /dev/memcg/apps/memory.app_score
+		echo root > /dev/memcg/memory.name
+		echo 400 > /dev/memcg/memory.app_score
 		cat /sys/module/lowmemorykiller/parameters/minfree
 	fi
 }
@@ -100,6 +156,76 @@ function configure_read_ahead_kb_values() {
 			echo $ra_kb > $dm
 		fi
 	done
+}
+
+function start_retasker() {
+  local cpuctl=/dev/cpuctl  
+  for i in $(find $cpuctl -type d -mindepth 1 -maxdepth 1); do    
+    for task in $(cat $i/tasks); do
+      echo $task > $cpuctl/cgroup.procs
+    done    
+    case $(basename "$i") in
+      top-app)
+        write $i/cpu.shares 1024
+        write $i/cpu.uclamp.max max
+        write $i/cpu.uclamp.min 10
+      ;;
+      foreground)
+        write $i/cpu.shares 208
+        write $i/cpu.uclamp.max 20
+        write $i/cpu.uclamp.min 5
+      ;;
+      background)
+        write $i/cpu.shares 52
+        write $i/cpu.uclamp.max 10
+        write $i/cpu.uclamp.min 0
+      ;;
+  done
+}
+
+function start_hypnus() {
+  write /sys/devices/platform/soc/soc:oplus-omrg/oplus-omrg0/ruler_enable 0
+  local cpu=/sys/devices/system/cpu
+  for i in 0 1 2 3 4 5 6 7; do    
+    cpu_max_freq=$(cat /sys/devices/system/cpu/cpu$i/cpufreq/cpuinfo_max_freq)
+    write /sys/kernel/msm_performance/parameters/cpu_max_freq $i:$cpu_max_freq
+    #write $cpu/cpu$i/online 1
+    #write $cpu/cpu$i/hotplug/target 222
+  done
+
+  echo 0 > /proc/sys/walt/sched_min_task_util_for_colocation
+  echo 0 > /proc/sys/walt/sched_min_task_util_for_boost
+  
+  local kgsl=/sys/class/kgsl/kgsl-3d0
+  write $kgsl/max_clock_mhz 545  
+  write $kgsl/throttling 0
+  write $kgsl/bus_split 0
+  write $kgsl/force_bus_on 1
+  write $kgsl/force_clk_on 1
+  write $kgsl/force_no_nap 1
+  write $kgsl/force_rail_on 1
+  write $kgsl/idle_timer 1000000
+}
+
+function start_hotfix() {  
+  setprop debug.refresh_rate.view_override 0
+  setprop vendor.display.refresh_rate_changeable 1  
+  write /sys/class/oplus_chg/battery/cool_down 3
+}
+
+function start_sysctl() {
+  local vm=/proc/sys/vm
+  echo 120 > $vm/swappiness
+  echo 11264 > $vm/extra_free_kbytes
+  echo 5120 > $vm/min_free_kbytes
+
+  local kn=/proc/sys/kernel
+  echo 5000000 > $kn/sched_latency_ns
+  echo 5000000 > $kn/sched_migration_cost_ns
+  echo 5000000 > $kn/sched_min_granularity_ns 
+  echo 3400000 > $kn/sched_rt_period_us
+  echo 3350000 > $kn/sched_rt_runtime_us
+  echo 128 > $kn/sched_nr_migrate
 }
 
 function configure_memory_parameters() {
@@ -327,6 +453,10 @@ fi
 
 echo deep > /sys/power/mem_sleep
 configure_memory_parameters
+start_retasker
+start_hypnus
+start_hotfix
+main_fn
 
 # Let kernel know our image version/variant/crm_version
 if [ -f /sys/devices/soc0/select_image ]; then
@@ -343,6 +473,111 @@ if [ -f /sys/devices/soc0/select_image ]; then
 	echo $image_variant > /sys/devices/soc0/image_variant
 	echo $oem_version > /sys/devices/soc0/image_crm_version
 fi
+
+# vars
+echo 0 > /sys/devices/system/edac/qcom-llcc/panic_on_ue
+
+GPU_PATH=/sys/class/kgsl/kgsl-3d0/max_pwrlevel
+POLICY_0_PATH=/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq
+POLICY_4_PATH=/sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq
+POLICY_7_PATH=/sys/devices/system/cpu/cpufreq/policy7/scaling_max_freq
+
+while [ ! -d /sdcard ]; do
+    sleep 10
+done
+
+# GPU
+if [ -f "${GPU_PATH}" ] ; then
+    GPU_POWER_LIMIT_ORIG=$(cat "${GPU_PATH}")
+else
+    exit
+fi;
+
+# POLICY_0
+if [ -f "${POLICY_0_PATH}" ] ; then
+    POLICY_0_MAX_FREQ_ORIG=$(cat "${POLICY_0_PATH}")
+else
+    exit
+fi;
+
+# POLICY_4
+if [ -f "${POLICY_4_PATH}" ] ; then
+    POLICY_4_MAX_FREQ_ORIG=$(cat "${POLICY_4_PATH}")
+else
+    exit
+fi;
+
+# POLICY_7
+if [ -f "${POLICY_7_PATH}" ] ; then
+    POLICY_7_MAX_FREQ_ORIG=$(cat "${POLICY_7_PATH}")
+else
+    exit
+fi;
+   
+# defaults
+
+LIMIT_PROFILE_PREV=initial
+
+main_fn() {
+    # reading current system values
+    GPU_POWER_LIMIT_TMP=$(cat "${GPU_PATH}")
+    POLICY_0_MAX_FREQ_TMP=$(cat "${POLICY_0_PATH}")
+    POLICY_4_MAX_FREQ_TMP=$(cat "${POLICY_4_PATH}")
+    POLICY_7_MAX_FREQ_TMP=$(cat "${POLICY_7_PATH}")
+  
+    # choosing new values based on config
+    
+    GPU_POWER_LIMIT=5
+    POLICY_0_MAX_FREQ=1171200
+    POLICY_4_MAX_FREQ=1766400
+    POLICY_7_MAX_FREQ=1401600
+    
+    if [ -n "${OVERRIDE_GPU_POWER_LIMIT}" ] ; then
+        GPU_POWER_LIMIT=${OVERRIDE_GPU_POWER_LIMIT}
+    fi
+    if [ -n "${OVERRIDE_POLICY_0_SCALING_MAX_FREQ}" ] ; then
+        POLICY_0_MAX_FREQ=${OVERRIDE_POLICY_0_SCALING_MAX_FREQ}
+    fi
+    if [ -n "${OVERRIDE_POLICY_4_SCALING_MAX_FREQ}" ] ; then
+        POLICY_4_MAX_FREQ=${OVERRIDE_POLICY_4_SCALING_MAX_FREQ}
+    fi
+    if [ -n "${OVERRIDE_POLICY_7_SCALING_MAX_FREQ}" ] ; then
+        POLICY_7_MAX_FREQ=${OVERRIDE_POLICY_7_SCALING_MAX_FREQ}
+    fi
+
+    if [ "${LIMIT_PROFILE_PREV}" != "${LIMIT_PROFILE}" ] ; then
+        LIMIT_PROFILE_PREV="${LIMIT_PROFILE}"
+    fi
+
+    # writing new values if needed
+    if [ "${GPU_POWER_LIMIT_TMP}" != "${GPU_POWER_LIMIT}" ] ; then
+        echo "${GPU_POWER_LIMIT}" > ${GPU_PATH}
+    fi
+    if [ "${POLICY_0_MAX_FREQ_TMP}" != "${POLICY_0_MAX_FREQ}" ] ; then
+        echo "${POLICY_0_MAX_FREQ}" > ${POLICY_0_PATH}
+    fi
+    if [ "${POLICY_4_MAX_FREQ_TMP}" != "${POLICY_4_MAX_FREQ}" ] ; then
+        echo "${POLICY_4_MAX_FREQ}" > ${POLICY_4_PATH}
+    fi
+    if [ "${POLICY_7_MAX_FREQ_TMP}" != "${POLICY_7_MAX_FREQ}" ] ; then
+        echo "${POLICY_7_MAX_FREQ}" > ${POLICY_7_PATH}
+    fi
+
+    }
+
+main_fn;
+
+while true; do
+    sleep 20
+
+    # do nothing if the device is sleeping
+    mWakefulness=$(dumpsys power | grep mWakefulness= | head -1 | cut -d "=" -f2)
+    if [ "${mWakefulness}" == "Dozing" ] || [ "${mWakefulness}" == "Asleep" ] ; then
+        continue
+    fi
+
+    main_fn;
+done
 
 # Change console log level as per console config property
 console_config=`getprop persist.vendor.console.silent.config`
