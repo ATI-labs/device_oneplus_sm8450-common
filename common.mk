@@ -416,6 +416,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     RemovePackages
 
+# QTI components
+TARGET_COMMON_QTI_COMPONENTS += \
+    alarm
+
+include $(QCOM_COMMON_PATH)/components.mk
+
 # RIL
 PRODUCT_PACKAGES += \
     android.hardware.radio@1.6.vendor \
