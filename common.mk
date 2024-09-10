@@ -440,7 +440,11 @@ PRODUCT_PACKAGES += \
     android.hardware.power@1.2.vendor \
     vendor.qti.hardware.perf@2.3.vendor
 
-#Private Keys
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/power/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml \
+    $(LOCAL_PATH)/configs/power/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf
+
+# Private Keys
 -include vendor/lineage-priv/keys/keys.mk
 
 # Protobuf
