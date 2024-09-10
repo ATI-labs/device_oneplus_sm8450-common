@@ -218,6 +218,9 @@ include hardware/oplus/sepolicy/qti/SEPolicy.mk
 # Thermal
 BOARD_VENDOR_SUPPORTS_THERMAL := true
 
+# SurfaceFlinger
+TARGET_USE_AOSP_SURFACEFLINGER := true
+
 # Verified Boot
 BOARD_AVB_ENABLE := true
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --set_hashtree_disabled_flag
