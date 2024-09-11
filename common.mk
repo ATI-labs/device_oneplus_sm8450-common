@@ -135,6 +135,8 @@ PRODUCT_PACKAGES += \
     android.frameworks.sensorservice@1.0.vendor \
     android.frameworks.stats-V1-ndk_platform.vendor \
     android.hardware.camera.provider@2.7.vendor \
+    android.hardware.graphics.common-V2-ndk.vendor \
+    android.hardware.graphics.common-V2-ndk_platform.vendor \
     android.hardware.graphics.common-V4-ndk.vendor \
     camera.device@1.0-impl \
     vendor.qti.hardware.camera.aon@1.0.vendor \
