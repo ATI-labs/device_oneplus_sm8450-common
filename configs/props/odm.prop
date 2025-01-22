@@ -35,7 +35,7 @@ ro.vendor.oplus.radio.project=1
 ro.vendor.oplus.radio.sar_regionmark=FCC
 
 # SVN
-ro.build.version.svn=76
+ro.build.version.svn=82
 
 ro.netflix.bsp_rev=Q8450-34634-1
 ro.com.android.dataroaming=false
